@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body class="all" ng-app="clockApp" ng-controller="clockController as clock">
+    <div class="clock">
+      {{clock.getTime()}}
+      <div class="format">
+        <label>Time Format:</label>
+          <div>
+              <label>
+                  <input type="radio" name="military" value="24" ng-model="clock.format">
+                  24-hour
+              </label>
+          </div>
+          <div>
+              <label>
+                  <input type="radio" name="standard" value="12" ng-model="clock.format">
+                  12-hour
+              </label>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
