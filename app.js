@@ -1,34 +1,19 @@
   var app = angular.module('clockApp', []);
-  app.controller('clockController', ["$timeout", function($timeout) {
+  app.controller('clockController', ["$timeout", "dateFilter", function($timeout, dateFilter) {
 
     this.format = 12;
     this.time = "";
 
     this.getTime = function() {
-      var today = new Date();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      if (m < 10) {m = "0" + m;}
-      var s = today.getSeconds();
-      if (s < 10) {s = "0" + s;}
+      var today;
       if (this.format == "24")
       {
-        this.time = h + ":" + m + ":" + s;
-        $timeout(this.getTime, null);
-        return h + ":" + m + ":" + s;
+        today = dateFilter(Date.now(), 'H:mm:ss');
       }
       else {
-        var t = "";
-        if (h > 12) {
-          h = h - 12;
-          t = "PM";
-        }
-        else {
-          t = "AM";
-        }
-        this.time = h + ":" + m + ":" + s + " " + t;
-        $timeout(this.getTime, null);
-        return h + ":" + m + ":" + s + " " + t;
+        today = dateFilter(Date.now(), 'h:mm:ss a');
       }
+      $timeout(this.getTime, null);
+      return today;
     };
   }]);
